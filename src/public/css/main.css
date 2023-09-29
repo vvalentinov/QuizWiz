@@ -1,0 +1,32 @@
+@import url("bootstrap.min.css");
+
+:root {
+    --clr-primary: #5E78C2;
+}
+
+html,
+body {
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.navbar {
+    background-color: var(--clr-primary);
+    color: white;
+}
+
+.navbar a {
+    color: #E8EFFF;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+footer {
+    margin-top: auto;
+    flex-shrink: 0;
+    background-color: var(--clr-primary);
+    color: white;
+}
