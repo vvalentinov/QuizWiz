@@ -1,4 +1,5 @@
 const express = require('express');
+const cookieParser = require('cookie-parser');
 
 const { PORT } = require('./constants/constants');
 
@@ -14,6 +15,7 @@ dbConfig();
 expressConfig(app);
 handlebarsConfig(app);
 
+app.use(cookieParser());
 app.use(routes);
 
 app.listen(PORT, () => console.log(`Server is listening on port ${PORT}...`));
