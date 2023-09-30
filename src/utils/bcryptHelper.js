@@ -5,3 +5,9 @@ exports.generateHash = async (input, saltRounds) => {
 
     return hash;
 };
+
+exports.validateUserPassword = async (inputPassword, userPassword) => {
+    const isValid = await bcrypt.compare(inputPassword, userPassword);
+
+    return isValid;
+};
