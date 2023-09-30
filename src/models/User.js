@@ -5,11 +5,11 @@ const { generateHash } = require('../utils/bcryptHelper');
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
-        required: true,
+        required: [true, 'Username is required!'],
     },
     password: {
         type: String,
-        required: true,
+        required: [true, 'Password is required!'],
     },
 });
 
@@ -21,7 +21,7 @@ userSchema.pre('save', async function () {
 
 userSchema.virtual('repeatPassword').set(function (value) {
     if (value !== this.password) {
-        throw new Error('Password and repeat-password do not match!');
+        throw new Error('Password and Repeat Password do not match!');
     }
 });
 

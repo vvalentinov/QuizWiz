@@ -4,15 +4,26 @@ const { JWT_KEY } = require('../constants/constants');
 
 const userService = require('../services/userService');
 
+const { getErrorMessage } = require('../utils/errorHelper');
+
 router.get('/register', (req, res) => {
     res.render('users/register');
 });
 
 router.post('/register', async (req, res) => {
-    const userData = req.body;
-    const token = await userService.register(userData);
-    res.cookie(JWT_KEY, token);
-    res.redirect('/');
+    const { username, password, repeatPassword } = req.body;
+    try {
+        const token = await userService.register(username, password, repeatPassword);
+        res.cookie(JWT_KEY, token);
+        res.redirect('/');
+    } catch (error) {
+        res.render('users/register', {
+            username,
+            password,
+            repeatPassword,
+            errorMessage: getErrorMessage(error),
+        });
+    }
 });
 
 router.get('/login', (req, res) => {
@@ -27,7 +38,11 @@ router.post('/login', async (req, res) => {
         res.cookie(JWT_KEY, token);
         res.redirect('/');
     } catch (error) {
-        res.render('users/login', { username, password, errorMessage: error.message });
+        res.render('users/login', {
+            username,
+            password,
+            errorMessage: getErrorMessage(error),
+        });
     }
 });
 
