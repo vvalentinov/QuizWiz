@@ -4,10 +4,6 @@ const { JWT_KEY } = require('../constants/constants');
 
 const userService = require('../services/userService');
 
-router.get('/login', (req, res) => {
-    res.render('users/login');
-});
-
 router.get('/register', (req, res) => {
     res.render('users/register');
 });
@@ -15,6 +11,17 @@ router.get('/register', (req, res) => {
 router.post('/register', async (req, res) => {
     const userData = req.body;
     const token = await userService.register(userData);
+    res.cookie(JWT_KEY, token);
+    res.redirect('/');
+});
+
+router.get('/login', (req, res) => {
+    res.render('users/login');
+});
+
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    const token = await userService.login(username, password);
     res.cookie(JWT_KEY, token);
     res.redirect('/');
 });
