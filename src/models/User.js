@@ -19,6 +19,12 @@ userSchema.pre('save', async function () {
     this.password = hash;
 });
 
+userSchema.virtual('repeatPassword').set(function (value) {
+    if (value !== this.password) {
+        throw new Error('Password and repeat-password do not match!');
+    }
+});
+
 const User = mongoose.model('User', userSchema);
 
 module.exports = User;
