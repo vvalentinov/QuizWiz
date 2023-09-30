@@ -4,10 +4,12 @@
     --clr-primary: #5E78C2;
 }
 
-html,
-body {
-    height: 100%;
+* {
     box-sizing: border-box;
+}
+
+body {
+    background-color: aliceblue;
 }
 
 .navbar {
@@ -19,14 +21,10 @@ body {
     color: #E8EFFF;
 }
 
-body {
-    display: flex;
-    flex-direction: column;
-}
-
 footer {
-    margin-top: auto;
-    flex-shrink: 0;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     background-color: var(--clr-primary);
     color: white;
 }

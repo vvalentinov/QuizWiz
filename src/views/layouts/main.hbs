@@ -20,7 +20,9 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <a class="navbar-brand fs-2" href="/">QuizWiz</a>
-                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <ul class="navbar-nav me-auto">
+                    </ul>
+                    <ul class="navbar-nav ">
                         {{#if isAuthenticated}}
                         <li class="nav-item fs-4">
                             <a class="nav-link" aria-current="page" href="/users/logout">Logout</a>
@@ -47,7 +49,7 @@
         {{/if}}
         {{{body}}}
     </main>
-    <footer class="py-3 text-center d-flex align-items-center justify-content-center fs-5">
+    <footer class="py-3 text-center d-flex align-items-center justify-content-center fs-4">
         <span>
             &copy; {{getCurrentYear}} - QuizWiz
         </span>
