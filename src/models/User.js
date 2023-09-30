@@ -10,7 +10,13 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: true,
-    }
+    },
+});
+
+userSchema.pre('save', async function () {
+    const hash = await generateHash(this.password, 10);
+
+    this.password = hash;
 });
 
 const User = mongoose.model('User', userSchema);
