@@ -39,6 +39,12 @@
         </nav>
     </header>
     <main>
+        {{#if errorMessage}}
+        <div class="container alert alert-danger alert-dismissible fade show text-center col-6 mt-5 fs-5" role="alert">
+            <strong>{{errorMessage}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{/if}}
         {{{body}}}
     </main>
     <footer class="py-3 text-center d-flex align-items-center justify-content-center fs-5">

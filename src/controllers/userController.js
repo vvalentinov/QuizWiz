@@ -21,9 +21,14 @@ router.get('/login', (req, res) => {
 
 router.post('/login', async (req, res) => {
     const { username, password } = req.body;
-    const token = await userService.login(username, password);
-    res.cookie(JWT_KEY, token);
-    res.redirect('/');
+
+    try {
+        const token = await userService.login(username, password);
+        res.cookie(JWT_KEY, token);
+        res.redirect('/');
+    } catch (error) {
+        res.render('users/login', { username, password, errorMessage: error.message });
+    }
 });
 
 router.get('/logout', (req, res) => {
