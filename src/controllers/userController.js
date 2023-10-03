@@ -5,14 +5,20 @@ const { JWT_KEY } = require('../constants/constants');
 const userService = require('../services/userService');
 
 const { getErrorMessage } = require('../utils/errorHelper');
+const { uploadImage } = require('../utils/uploadImage');
+
+const multer = require('multer');
 
 router.get('/register', (req, res) => {
     res.render('users/register');
 });
 
-router.post('/register', async (req, res) => {
+router.post('/register', multer().single('image'), async (req, res) => {
     const { username, password, repeatPassword } = req.body;
+    const image = req.file;
+
     try {
+        const { secure_url } = await uploadImage(image.buffer, 'Users');
         const token = await userService.register(username, password, repeatPassword);
         res.cookie(JWT_KEY, token);
         res.redirect('/');
