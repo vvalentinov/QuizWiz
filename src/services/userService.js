@@ -3,13 +3,31 @@ const User = require('../models/User');
 const { generateToken } = require('../utils/generateToken');
 const { validateUserPassword } = require('../utils/bcryptHelper');
 
-exports.register = async (username, password, repeatPassword) => {
+const { uploadImage } = require('../utils/uploadImage');
+
+const path = require('path');
+
+exports.register = async (username, image, password, repeatPassword) => {
     const user = await User.findOne({ username });
     if (user) {
         throw new Error('User already exists!');
     }
 
-    const createdUser = await User.create({ username, password, repeatPassword });
+    if (!image) {
+        throw new Error('Image file is required!');
+    }
+
+    const imageExt = path.extname(image.originalname);
+
+    if (imageExt != '.png' &&
+        imageExt != '.jpg' &&
+        imageExt != '.jpeg') {
+        throw new Error('Image file must be in format: .png, .jpg or .jpeg!');
+    }
+
+    const { secure_url } = await uploadImage(image.buffer, 'Users');
+
+    const createdUser = await User.create({ username, image: secure_url, password, repeatPassword });
 
     const token = await generateToken(createdUser._id, createdUser.username);
 
