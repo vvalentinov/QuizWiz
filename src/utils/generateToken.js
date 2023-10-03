@@ -1,6 +1,6 @@
 const jwt = require('../lib/jwt');
 
-const { JWT_SECRET } = require('../constants/constants');
+const { JWT_SECRET } = require('../constants/jwtConstants');
 
 exports.generateToken = async (_id, username) => {
     const payload = { _id, username };

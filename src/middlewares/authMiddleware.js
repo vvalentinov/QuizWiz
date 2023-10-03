@@ -1,6 +1,6 @@
 const jwt = require('../lib/jwt');
 
-const { JWT_KEY, JWT_SECRET } = require('../constants/constants');
+const { JWT_KEY, JWT_SECRET } = require('../constants/jwtConstants');
 
 exports.authenticate = async (req, res, next) => {
     const token = req.cookies[JWT_KEY];
