@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { JWT_KEY } = require('../constants/constants');
+const { JWT_KEY } = require('../constants/jwtConstants');
 
 const userService = require('../services/userService');
 

@@ -1,8 +1,8 @@
 const User = require('../models/User');
+const UserRole = require('../models/UserRole');
 
 const { generateToken } = require('../utils/generateToken');
 const { validateUserPassword } = require('../utils/bcryptHelper');
-
 const { uploadImage } = require('../utils/uploadImage');
 
 const path = require('path');
@@ -27,7 +27,13 @@ exports.register = async (username, image, password, repeatPassword) => {
 
     const { secure_url } = await uploadImage(image.buffer, 'Users');
 
-    const createdUser = await User.create({ username, image: secure_url, password, repeatPassword });
+    const createdUser = await User.create({
+        username,
+        image: secure_url,
+        password,
+        repeatPassword,
+        role: await getUserRoleId(),
+    });
 
     const token = await generateToken(createdUser._id, createdUser.username);
 
@@ -49,3 +55,5 @@ exports.login = async (username, password) => {
 
     return token;
 };
+
+const getUserRoleId = async () => (await UserRole.findOne({ name: 'user' }))._id;

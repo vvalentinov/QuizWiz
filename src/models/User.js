@@ -15,6 +15,11 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'User image is required!'],
     },
+    role: {
+        type: mongoose.Types.ObjectId,
+        ref: 'UserRole',
+        required: true,
+    },
 });
 
 userSchema.pre('save', async function () {
