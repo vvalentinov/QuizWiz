@@ -14,6 +14,11 @@ const quizSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    questions: [{
+        type: mongoose.Types.ObjectId,
+        ref: 'Question',
+        required: true,
+    }],
 });
 
 const Quiz = mongoose.model('Quiz', quizSchema);
