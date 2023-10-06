@@ -25,7 +25,7 @@
                         </li>
                         {{#if isAuthenticated}}
                         <li class="nav-item">
-                            <a class="nav-link fs-2" aria-current="page" href="#">Upload Quiz</a>
+                            <a class="nav-link fs-2" aria-current="page" href="/quiz/create">Upload Quiz</a>
                         </li>
                         {{/if}}
                     </ul>
@@ -48,13 +48,15 @@
         </nav>
     </header>
 
-    {{#if errorMessage}}
-    <div class="container alert alert-danger alert-dismissible fade show text-center col-6 mt-3 fs-5" role="alert">
-        <strong>{{errorMessage}}</strong>
-        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
-    {{/if}}
-    {{{body}}}
+    <main>
+        {{#if errorMessage}}
+        <div class="container alert alert-danger alert-dismissible fade show text-center col-6 mt-5 fs-5" role="alert">
+            <strong>{{errorMessage}}</strong>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+        {{/if}}
+        {{{body}}}
+    </main>
 
     <footer class="py-3 text-center fs-4">
         <span>
