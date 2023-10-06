@@ -55,6 +55,14 @@ footer {
     transform: translateX(50%);
 }
 
+.card404Header {
+    background-color: #C05B69;
+}
+
+.card404Body {
+    background-color: #96ACFB;
+}
+
 @media only screen and (max-width: 991px) {
     .navbar .collapse .navbar-nav:nth-child(2) {
         display: block !important;
