@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
-router.get('/', (req, res) => {
+const { homeRoute } = require('../constants/routesNames');
+
+router.get(homeRoute, (req, res) => {
     res.render('home');
 });
 

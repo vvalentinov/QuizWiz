@@ -1,6 +1,8 @@
 const router = require('express').Router();
 
-router.get('/create', (req, res) => {
+const { createQuizRoute } = require('../constants/routesNames');
+
+router.get(createQuizRoute, (req, res) => {
     res.render('quizzes/create');
 });
 

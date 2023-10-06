@@ -6,13 +6,15 @@ const userService = require('../services/userService');
 
 const { getErrorMessage } = require('../utils/errorHelper');
 
+const { registerRoute, loginRoute } = require('../constants/routesNames');
+
 const multer = require('multer');
 
-router.get('/register', (req, res) => {
+router.get(registerRoute, (req, res) => {
     res.render('users/register');
 });
 
-router.post('/register', multer().single('image'), async (req, res) => {
+router.post(registerRoute, multer().single('image'), async (req, res) => {
     const { username, password, repeatPassword } = req.body;
     const image = req.file;
 
@@ -30,11 +32,11 @@ router.post('/register', multer().single('image'), async (req, res) => {
     }
 });
 
-router.get('/login', (req, res) => {
+router.get(loginRoute, (req, res) => {
     res.render('users/login');
 });
 
-router.post('/login', async (req, res) => {
+router.post(loginRoute, async (req, res) => {
     const { username, password } = req.body;
 
     try {
