@@ -19,22 +19,27 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <ul class="navbar-nav me-auto d-flex align-items-center gap-3">
+                    <ul class="navbar-nav me-auto">
                         <li class="nav-item">
                             <a class="nav-link fs-2" href="/">{{getAppName}}</a>
                         </li>
-                    </ul>
-                    <ul class="navbar-nav d-flex align-items-center">
                         {{#if isAuthenticated}}
                         <li class="nav-item">
-                            <a class="nav-link fs-4" aria-current="page" href="/users/logout">Logout</a>
+                            <a class="nav-link fs-2" aria-current="page" href="#">Upload Quiz</a>
+                        </li>
+                        {{/if}}
+                    </ul>
+                    <ul class="navbar-nav">
+                        {{#if isAuthenticated}}
+                        <li class="nav-item">
+                            <a class="nav-link fs-2" aria-current="page" href="/users/logout">Logout</a>
                         </li>
                         {{else}}
                         <li class="nav-item">
-                            <a class="nav-link fs-4" aria-current="page" href="/users/login">Login</a>
+                            <a class="nav-link fs-2" aria-current="page" href="/users/login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-4" aria-current="page" href="/users/register">Register</a>
+                            <a class="nav-link fs-2" aria-current="page" href="/users/register">Register</a>
                         </li>
                         {{/if}}
                     </ul>
