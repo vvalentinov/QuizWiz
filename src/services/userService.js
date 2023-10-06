@@ -7,7 +7,11 @@ const { uploadImage } = require('../utils/uploadImage');
 
 const path = require('path');
 
-exports.register = async (username, image, password, repeatPassword) => {
+exports.register = async (
+    username,
+    image,
+    password,
+    repeatPassword) => {
     const user = await User.findOne({ username });
     if (user) {
         throw new Error('User already exists!');
@@ -35,7 +39,10 @@ exports.register = async (username, image, password, repeatPassword) => {
         role: await getUserRoleId(),
     });
 
-    const token = await generateToken(createdUser._id, createdUser.username);
+    const token = await generateToken(
+        createdUser._id,
+        createdUser.username,
+        createdUser.image);
 
     return token;
 };
@@ -51,7 +58,10 @@ exports.login = async (username, password) => {
         throw new Error('Invalid username or password!');
     }
 
-    const token = await generateToken(user._id, user.username);
+    const token = await generateToken(
+        user._id,
+        user.username,
+        user.image);
 
     return token;
 };

@@ -31,9 +31,15 @@
                     </ul>
                     <ul class="navbar-nav">
                         {{#if isAuthenticated}}
-                        <li class="nav-item">
-                            <a class="nav-link fs-2" aria-current="page" href="/users/logout">Logout</a>
-                        </li>
+                        <div class="dropdown-center">
+                            <a data-bs-toggle="dropdown" aria-expanded="false">
+                                <img src={{user.image}} alt={{user.username}}>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-dark fs-5">
+                                <li><a class="dropdown-item" href="">Settings</a></li>
+                                <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
+                            </ul>
+                        </div>
                         {{else}}
                         <li class="nav-item">
                             <a class="nav-link fs-2" aria-current="page" href="/users/login">Login</a>

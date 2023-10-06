@@ -27,8 +27,49 @@ body {
     color: #E8EFFF;
 }
 
+.navbar .collapse .navbar-nav:nth-child(2) {
+    margin-right: 7rem;
+}
+
+.navbar .collapse .navbar-nav:nth-child(2) img {
+    height: 3rem;
+    cursor: pointer;
+}
+
 footer {
     background-color: var(--clr-primary);
     color: white;
     margin-top: auto;
+}
+
+.dropdown-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.dropdown-center .dropdown-menu {
+    left: auto;
+    right: 50%;
+    transform: translateX(50%);
+}
+
+@media only screen and (max-width: 991px) {
+    nav .secondNav {
+        display: block !important;
+    }
+
+    .dropdown-center {
+        display: block;
+        justify-content: normal;
+        align-items: normal;
+        position: static;
+    }
+
+    .dropdown-center .dropdown-menu {
+        left: auto;
+        right: auto;
+        transform: none;
+    }
 }
