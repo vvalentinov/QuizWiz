@@ -5,6 +5,8 @@ const { generateToken } = require('../utils/generateToken');
 const { validateUserPassword } = require('../utils/bcryptHelper');
 const { uploadImage } = require('../utils/uploadImage');
 
+require('dotenv').config();
+
 const path = require('path');
 
 exports.register = async (
@@ -17,23 +19,24 @@ exports.register = async (
         throw new Error('User already exists!');
     }
 
-    if (!image) {
-        throw new Error('Image file is required!');
+    let userImage = process.env.CLOUDINARY_USER_ICON_URL;
+
+    if (image) {
+        const imageExt = path.extname(image.originalname);
+
+        if (imageExt != '.png' &&
+            imageExt != '.jpg' &&
+            imageExt != '.jpeg') {
+            throw new Error('Image file must be in format: .png, .jpg or .jpeg!');
+        }
+
+        const { secure_url } = await uploadImage(image.buffer, 'Users');
+        userImage = secure_url;
     }
-
-    const imageExt = path.extname(image.originalname);
-
-    if (imageExt != '.png' &&
-        imageExt != '.jpg' &&
-        imageExt != '.jpeg') {
-        throw new Error('Image file must be in format: .png, .jpg or .jpeg!');
-    }
-
-    const { secure_url } = await uploadImage(image.buffer, 'Users');
 
     const createdUser = await User.create({
         username,
-        image: secure_url,
+        image: userImage,
         password,
         repeatPassword,
         role: await getUserRoleId(),
