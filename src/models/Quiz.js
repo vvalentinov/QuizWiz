@@ -19,6 +19,10 @@ const quizSchema = new mongoose.Schema({
         ref: 'Question',
         required: true,
     }],
+    category: {
+        type: mongoose.Types.ObjectId,
+        ref: 'Category',
+    },
 });
 
 const Quiz = mongoose.model('Quiz', quizSchema);
