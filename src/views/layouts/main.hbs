@@ -22,7 +22,8 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link fs-2" href="/">{{getAppName}}</a>
+                            <a class="nav-link fs-2" href="/">{{getAppName}} <i
+                                    class="fa-regular fa-circle-question"></i></a>
                         </li>
                         {{#if isAuthenticated}}
                         <li class="nav-item">
@@ -37,7 +38,8 @@
                                 <img class="rounded-5" src={{user.image}} alt={{user.username}}>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark fs-5">
-                                <li><a class="dropdown-item" href="">Settings <i class="fa-regular fa-user"></i></a>
+                                <li><a class="dropdown-item" href="/users/settings/{{user._id}}">Settings <i
+                                            class="fa-solid fa-gears"></i></a>
                                 </li>
                                 <li><a class="dropdown-item" href="/users/logout">Logout <i
                                             class="fa-solid fa-right-from-bracket"></i></a></li>

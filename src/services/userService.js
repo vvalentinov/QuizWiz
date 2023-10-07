@@ -69,4 +69,6 @@ exports.login = async (username, password) => {
     return token;
 };
 
+exports.getUserWithId = (userId) => User.findById(userId);
+
 const getUserRoleId = async () => (await UserRole.findOne({ name: 'user' }))._id;

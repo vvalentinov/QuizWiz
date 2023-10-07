@@ -52,6 +52,12 @@ router.post(loginRoute, async (req, res) => {
     }
 });
 
+router.get('/settings/:userId', async (req, res) => {
+    const userId = req.params.userId;
+    const user = await userService.getUserWithId(userId).populate('role').lean();
+    res.render('users/settings', { user });
+});
+
 router.get('/logout', (req, res) => {
     res.clearCookie(JWT_KEY);
     res.redirect('/');
