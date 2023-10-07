@@ -21,7 +21,8 @@
             <img src={{user.image}} alt={{user.username}} class="w-50 rounded-5">
         </div>
         <form action="/users/settings/picture" method="POST"
-            class="w-50 border border-2 border-dark rounded-5 py-3 px-3 settingsContainer">
+            class="w-50 border border-2 border-dark rounded-5 py-3 px-3 settingsContainer"
+            enctype="multipart/form-data">
             <h3>Change Profile Picture</h3>
             <div class="my-4">
                 <input class="form-control form-control-lg border border-2 border-dark" type="file" id="formFile">
