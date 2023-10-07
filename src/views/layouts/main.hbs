@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="/css/site.css" />
     <title>{{getAppName}}</title>
 </head>
@@ -36,8 +37,10 @@
                                 <img class="rounded-5" src={{user.image}} alt={{user.username}}>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark fs-5">
-                                <li><a class="dropdown-item" href="">Settings</a></li>
-                                <li><a class="dropdown-item" href="/users/logout">Logout</a></li>
+                                <li><a class="dropdown-item" href="">Settings <i class="fa-regular fa-user"></i></a>
+                                </li>
+                                <li><a class="dropdown-item" href="/users/logout">Logout <i
+                                            class="fa-solid fa-right-from-bracket"></i></a></li>
                             </ul>
                         </div>
                         {{else}}
