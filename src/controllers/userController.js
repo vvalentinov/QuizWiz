@@ -58,6 +58,10 @@ router.get('/settings/:userId', async (req, res) => {
     res.render('users/settings', { user });
 });
 
+router.post('/settings/picture', (req, res) => {
+    res.redirect('/');
+});
+
 router.get('/logout', (req, res) => {
     res.clearCookie(JWT_KEY);
     res.redirect('/');

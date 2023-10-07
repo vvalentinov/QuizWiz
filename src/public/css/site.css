@@ -2,6 +2,7 @@
 
 :root {
     --clr-primary: #5E78C2;
+    --clr-secondary: #96ACFB;
 }
 
 html,
@@ -55,12 +56,16 @@ footer {
     transform: translateX(50%);
 }
 
-.card404Header {
-    background-color: #C05B69;
+.cardColor {
+    background-color: var(--clr-secondary);
 }
 
-.card404Body {
-    background-color: #96ACFB;
+.settingsContainer {
+    background-color: #9B95E8;
+}
+
+.settingsContainer .card {
+    background-color: #A565B8;
 }
 
 @media only screen and (max-width: 991px) {
