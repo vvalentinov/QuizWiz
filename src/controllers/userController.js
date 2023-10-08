@@ -76,6 +76,18 @@ router.post('/settings/picture',
         }
     });
 
+router.post('/settings/username', isAuthenticated, async (req, res) => {
+    const { username } = req.body;
+    const userId = req.user._id;
+    try {
+        await userService.changeUsername(userId, username);
+        res.redirect('/');
+    } catch (error) {
+        const user = await userService.getUserWithId(userId).populate('role').lean();
+        res.render('users/settings', { user, errorMessage: getErrorMessage(error) });
+    }
+});
+
 router.get('/logout', (req, res) => {
     res.clearCookie(JWT_KEY);
     res.redirect('/');

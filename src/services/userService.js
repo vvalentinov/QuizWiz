@@ -107,4 +107,12 @@ exports.changeUserPicture = async (userId, image) => {
     return token;
 };
 
+exports.changeUsername = async (userId, newUsername) => {
+    if (!newUsername) {
+        throw new Error('Username input is empty!');
+    }
+    await User.findByIdAndUpdate(userId, { username: newUsername });
+    // const user = await User.findById(userId);
+};
+
 const getUserRoleId = async () => (await UserRole.findOne({ name: 'user' }))._id;
