@@ -11,9 +11,15 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, 'Password is required!'],
     },
-    image: {
-        type: String,
-        required: [true, 'User image is required!'],
+    profileImage: {
+        publicId: {
+            type: String,
+            required: [true, 'User image id is required!'],
+        },
+        url: {
+            type: String,
+            required: [true, 'User image is required!'],
+        },
     },
     role: {
         type: mongoose.Types.ObjectId,
@@ -24,7 +30,6 @@ const userSchema = new mongoose.Schema({
 
 userSchema.pre('save', async function () {
     const hash = await generateHash(this.password, 10);
-
     this.password = hash;
 });
 

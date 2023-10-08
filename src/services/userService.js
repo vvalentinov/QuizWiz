@@ -3,7 +3,7 @@ const UserRole = require('../models/UserRole');
 
 const { generateToken } = require('../utils/generateToken');
 const { validateUserPassword } = require('../utils/bcryptHelper');
-const { uploadImage } = require('../utils/uploadImage');
+const { uploadImage } = require('../utils/cloudinaryUtil');
 
 require('dotenv').config();
 
@@ -19,7 +19,8 @@ exports.register = async (
         throw new Error('User already exists!');
     }
 
-    let userImage = process.env.CLOUDINARY_USER_ICON_URL;
+    let userImageId = process.env.CLOUDINARY_USER_ICON_ID;
+    let userImageUrl = process.env.CLOUDINARY_USER_ICON_URL;
 
     if (image) {
         const imageExt = path.extname(image.originalname);
@@ -30,13 +31,17 @@ exports.register = async (
             throw new Error('Image file must be in format: .png, .jpg or .jpeg!');
         }
 
-        const { secure_url } = await uploadImage(image.buffer, 'Users');
-        userImage = secure_url;
+        const { public_id, secure_url } = await uploadImage(image.buffer, 'Users');
+        userImageId = public_id;
+        userImageUrl = secure_url;
     }
 
     const createdUser = await User.create({
         username,
-        image: userImage,
+        profileImage: {
+            publicId: userImageId,
+            url: userImageUrl,
+        },
         password,
         repeatPassword,
         role: await getUserRoleId(),
@@ -45,7 +50,7 @@ exports.register = async (
     const token = await generateToken(
         createdUser._id,
         createdUser.username,
-        createdUser.image);
+        createdUser.profileImage);
 
     return token;
 };
@@ -64,7 +69,7 @@ exports.login = async (username, password) => {
     const token = await generateToken(
         user._id,
         user.username,
-        user.image);
+        user.profileImage);
 
     return token;
 };

@@ -8,6 +8,8 @@ const { getErrorMessage } = require('../utils/errorHelper');
 
 const { registerRoute, loginRoute } = require('../constants/routesNames');
 
+const { isAuthenticated } = require('../middlewares/authMiddleware');
+
 const multer = require('multer');
 
 router.get(registerRoute, (req, res) => {
@@ -58,9 +60,13 @@ router.get('/settings/:userId', async (req, res) => {
     res.render('users/settings', { user });
 });
 
-router.post('/settings/picture', (req, res) => {
-    res.redirect('/');
-});
+router.post('/settings/picture',
+    isAuthenticated,
+    multer().single('image'),
+    (req, res) => {
+        const image = req.file;
+        res.redirect('/');
+    });
 
 router.get('/logout', (req, res) => {
     res.clearCookie(JWT_KEY);

@@ -8,7 +8,7 @@
 </div>
 
 <div class="container border border-3 border-dark rounded-5 text-center mt-4 cardColor">
-    <div class="d-flex justify-content-center align-items-center my-3 gap-4 px-4">
+    <div class="d-flex justify-content-center align-items-stretch my-3 gap-4 px-4">
         <div
             class="border border-2 border-dark w-50 d-flex justify-content-center align-items-center gap-3 px-3 py-3 rounded-5 settingsContainer">
             <div class="card text-center text-white w-50 fs-5 border border-3 border-dark rounded-5">
@@ -18,18 +18,20 @@
                         online presence up-to-date and stylish. 🌟🖼️</p>
                 </div>
             </div>
-            <img src={{user.image}} alt={{user.username}} class="w-50 rounded-5">
+            <img src={{user.profileImage.url}} alt={{user.username}} class="w-50 rounded-5">
         </div>
-        <form action="/users/settings/picture" method="POST"
-            class="w-50 border border-2 border-dark rounded-5 py-3 px-3 settingsContainer"
-            enctype="multipart/form-data">
-            <h3>Change Profile Picture</h3>
-            <div class="my-4">
-                <input class="form-control form-control-lg border border-2 border-dark" type="file" id="formFile">
-            </div>
-            <button class="btn btn-danger btn-lg px-5 border border-2 border-dark" type="submit">
-                Change <i class="fa-solid fa-image"></i>
-            </button>
-        </form>
+        <div
+            class="w-50 border border-2 border-dark rounded-5 py-3 px-3 settingsContainer d-flex flex-column justify-content-center">
+            <form action="/users/settings/picture" method="POST" enctype="multipart/form-data">
+                <h3>Change Profile Picture</h3>
+                <div class="my-4">
+                    <input class="form-control form-control-lg border border-2 border-dark" type="file" id="formFile"
+                        name="image">
+                </div>
+                <button class="btn btn-danger btn-lg px-5 border border-2 border-dark" type="submit">
+                    Change <i class="fa-solid fa-image"></i>
+                </button>
+            </form>
+        </div>
     </div>
 </div>

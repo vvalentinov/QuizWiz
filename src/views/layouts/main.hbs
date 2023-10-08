@@ -19,15 +19,15 @@
                     aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+                <div class="collapse navbar-collapse fs-4" id="navbarTogglerDemo01">
                     <ul class="navbar-nav me-auto">
                         <li class="nav-item">
-                            <a class="nav-link fs-2" href="/">{{getAppName}} <i
+                            <a class="nav-link" href="/">{{getAppName}} <i
                                     class="fa-regular fa-circle-question"></i></a>
                         </li>
                         {{#if isAuthenticated}}
                         <li class="nav-item">
-                            <a class="nav-link fs-2" aria-current="page" href="/quiz/create">Upload Quiz</a>
+                            <a class="nav-link" aria-current="page" href="/quiz/create">Upload Quiz</a>
                         </li>
                         {{/if}}
                     </ul>
@@ -35,22 +35,27 @@
                         {{#if isAuthenticated}}
                         <div class="dropdown-center">
                             <a data-bs-toggle="dropdown" aria-expanded="false">
-                                <img class="rounded-5" src={{user.image}} alt={{user.username}}>
+                                <img class="rounded-5" src={{user.profileImage.url}} alt={{user.username}}>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark fs-5">
-                                <li><a class="dropdown-item" href="/users/settings/{{user._id}}">Settings <i
-                                            class="fa-solid fa-gears"></i></a>
+                                <li>
+                                    <a class="dropdown-item" href="/users/settings/{{user._id}}">Settings
+                                        <i class="fa-solid fa-gears"></i>
+                                    </a>
                                 </li>
-                                <li><a class="dropdown-item" href="/users/logout">Logout <i
-                                            class="fa-solid fa-right-from-bracket"></i></a></li>
+                                <li>
+                                    <a class="dropdown-item" href="/users/logout">Logout
+                                        <i class="fa-solid fa-right-from-bracket"></i>
+                                    </a>
+                                </li>
                             </ul>
                         </div>
                         {{else}}
                         <li class="nav-item">
-                            <a class="nav-link fs-2" aria-current="page" href="/users/login">Login</a>
+                            <a class="nav-link" aria-current="page" href="/users/login">Login</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link fs-2" aria-current="page" href="/users/register">Register</a>
+                            <a class="nav-link" aria-current="page" href="/users/register">Register</a>
                         </li>
                         {{/if}}
                     </ul>
