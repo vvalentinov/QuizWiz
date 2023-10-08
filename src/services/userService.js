@@ -3,7 +3,7 @@ const UserRole = require('../models/UserRole');
 
 const { generateToken } = require('../utils/generateToken');
 const { validateUserPassword } = require('../utils/bcryptHelper');
-const { uploadImage } = require('../utils/cloudinaryUtil');
+const { uploadImage, deleteImage } = require('../utils/cloudinaryUtil');
 
 require('dotenv').config();
 
@@ -75,5 +75,36 @@ exports.login = async (username, password) => {
 };
 
 exports.getUserWithId = (userId) => User.findById(userId);
+
+exports.changeUserPicture = async (userId, image) => {
+    if (!image) {
+        throw new Error('Profile picture input is empty!');
+    }
+
+    const imageExt = path.extname(image.originalname);
+
+    if (imageExt != '.png' &&
+        imageExt != '.jpg' &&
+        imageExt != '.jpeg') {
+        throw new Error('Image file must be in format: .png, .jpg or .jpeg!');
+    }
+
+    const user = await User.findById(userId);
+
+    await deleteImage(user.profileImage.publicId);
+
+    const { public_id, secure_url } = await uploadImage(image.buffer, 'Users');
+    const updatedUser = await User.findByIdAndUpdate(userId, {
+        'profileImage.publicId': public_id,
+        'profileImage.url': secure_url,
+    }, { new: true });
+
+    const token = await generateToken(
+        updatedUser._id,
+        updatedUser.username,
+        updatedUser.profileImage);
+
+    return token;
+};
 
 const getUserRoleId = async () => (await UserRole.findOne({ name: 'user' }))._id;

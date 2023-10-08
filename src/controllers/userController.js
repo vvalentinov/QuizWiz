@@ -63,9 +63,16 @@ router.get('/settings/:userId', async (req, res) => {
 router.post('/settings/picture',
     isAuthenticated,
     multer().single('image'),
-    (req, res) => {
-        const image = req.file;
-        res.redirect('/');
+    async (req, res) => {
+        try {
+            const userId = req.user._id;
+            const token = await userService.changeUserPicture(userId, req.file);
+            res.clearCookie(JWT_KEY);
+            res.cookie(JWT_KEY, token);
+            res.redirect('/');
+        } catch (error) {
+            res.render('users/settings', { errorMessage: getErrorMessage(error) });
+        }
     });
 
 router.get('/logout', (req, res) => {

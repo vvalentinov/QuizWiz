@@ -17,3 +17,5 @@ exports.uploadImage = (buffer, folderName) => {
 
     return promise;
 };
+
+exports.deleteImage = async (imagePublicId) => await cloudinary.uploader.destroy(imagePublicId);
