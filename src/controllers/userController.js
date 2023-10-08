@@ -64,14 +64,15 @@ router.post('/settings/picture',
     isAuthenticated,
     multer().single('image'),
     async (req, res) => {
+        const userId = req.user._id;
         try {
-            const userId = req.user._id;
             const token = await userService.changeUserPicture(userId, req.file);
             res.clearCookie(JWT_KEY);
             res.cookie(JWT_KEY, token);
             res.redirect('/');
         } catch (error) {
-            res.render('users/settings', { errorMessage: getErrorMessage(error) });
+            const user = await userService.getUserWithId(userId).populate('role').lean();
+            res.render('users/settings', { user, errorMessage: getErrorMessage(error) });
         }
     });
 
