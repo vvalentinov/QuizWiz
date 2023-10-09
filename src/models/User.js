@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const { generateHash } = require('../utils/bcryptHelper');
+const { generateHash } = require('../utils/bcryptUtil');
 
 const userSchema = new mongoose.Schema({
     username: {

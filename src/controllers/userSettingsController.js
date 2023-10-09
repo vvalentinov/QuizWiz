@@ -2,9 +2,9 @@ const router = require('express').Router();
 
 const { JWT_KEY } = require('../constants/jwtConstants');
 
-const userService = require('../services/userService');
+const userSettingsService = require('../services/userSettingsService');
 
-const { getErrorMessage } = require('../utils/errorHelper');
+const { getErrorMessage } = require('../utils/errorUtil');
 
 const {
     userSettingsRoute,
@@ -19,7 +19,7 @@ const multer = require('multer');
 
 router.get(userSettingsRoute, async (req, res) => {
     const userId = req.params.userId;
-    const user = await userService.getUserWithId(userId).populate('role').lean();
+    const user = await userSettingsService.getUserWithId(userId).populate('role').lean();
     res.render('users/settings', { user });
 });
 
@@ -29,12 +29,12 @@ router.post(changeUserPictureRoute,
     async (req, res) => {
         const userId = req.user._id;
         try {
-            const token = await userService.changeUserPicture(userId, req.file);
+            const token = await userSettingsService.changeUserPicture(userId, req.file);
             res.clearCookie(JWT_KEY);
             res.cookie(JWT_KEY, token);
             res.redirect('/');
         } catch (error) {
-            const user = await userService.getUserWithId(userId).populate('role').lean();
+            const user = await userSettingsService.getUserWithId(userId).populate('role').lean();
             res.render('users/settings', { user, errorMessage: getErrorMessage(error) });
         }
     });
@@ -43,10 +43,10 @@ router.post(changeUserUsernameRoute, isAuthenticated, async (req, res) => {
     const { username } = req.body;
     const userId = req.user._id;
     try {
-        await userService.changeUsername(userId, username);
+        await userSettingsService.changeUsername(userId, username);
         res.redirect('/');
     } catch (error) {
-        const user = await userService.getUserWithId(userId).populate('role').lean();
+        const user = await userSettingsService.getUserWithId(userId).populate('role').lean();
         res.render('users/settings', { user, errorMessage: getErrorMessage(error) });
     }
 });
@@ -55,10 +55,10 @@ router.post(changeUserPasswordRoute, isAuthenticated, async (req, res) => {
     const { oldPassword, newPassword } = req.body;
     const userId = req.user._id;
     try {
-        await userService.changePassword(userId, oldPassword, newPassword);
+        await userSettingsService.changePassword(userId, oldPassword, newPassword);
         res.redirect('/');
     } catch (error) {
-        const user = await userService.getUserWithId(userId).populate('role').lean();
+        const user = await userSettingsService.getUserWithId(userId).populate('role').lean();
         res.render('users/settings', { user, errorMessage: getErrorMessage(error) });
     }
 });

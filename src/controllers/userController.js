@@ -5,7 +5,7 @@ const { registerRoute, loginRoute, logoutRoute } = require('../constants/routesN
 
 const userService = require('../services/userService');
 
-const { getErrorMessage } = require('../utils/errorHelper');
+const { getErrorMessage } = require('../utils/errorUtil');
 
 const multer = require('multer');
 
