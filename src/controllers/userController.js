@@ -1,12 +1,11 @@
 const router = require('express').Router();
 
 const { JWT_KEY } = require('../constants/jwtConstants');
+const { registerRoute, loginRoute, logoutRoute } = require('../constants/routesNames/user');
 
 const userService = require('../services/userService');
 
 const { getErrorMessage } = require('../utils/errorHelper');
-
-const { registerRoute, loginRoute, logoutRoute } = require('../constants/routesNames');
 
 const multer = require('multer');
 

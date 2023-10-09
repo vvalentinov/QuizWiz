@@ -11,7 +11,7 @@ const {
     changeUserPictureRoute,
     changeUserUsernameRoute,
     changeUserPasswordRoute,
-} = require('../constants/routesNames');
+} = require('../constants/routesNames/userSettings');
 
 const { isAuthenticated } = require('../middlewares/authMiddleware');
 
