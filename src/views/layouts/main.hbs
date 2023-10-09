@@ -38,6 +38,13 @@
                                 <img class="rounded-5" src={{user.profileImage.url}} alt={{user.username}}>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-dark fs-5">
+                                {{#if isAdmin}}
+                                <li>
+                                    <a class="dropdown-item" href="">Create Category
+                                        <i class="fa-solid fa-tag"></i>
+                                    </a>
+                                </li>
+                                {{/if}}
                                 <li>
                                     <a class="dropdown-item" href="/users/settings/{{user._id}}">Settings
                                         <i class="fa-solid fa-gears"></i>

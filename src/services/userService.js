@@ -50,7 +50,8 @@ exports.register = async (
     const token = await generateToken(
         createdUser._id,
         createdUser.username,
-        createdUser.profileImage);
+        createdUser.profileImage,
+        'user');
 
     return token;
 };
@@ -69,7 +70,8 @@ exports.login = async (username, password) => {
     const token = await generateToken(
         user._id,
         user.username,
-        user.profileImage);
+        user.profileImage,
+        await getUserRoleName(user._id));
 
     return token;
 };
@@ -102,7 +104,8 @@ exports.changeUserPicture = async (userId, image) => {
     const token = await generateToken(
         updatedUser._id,
         updatedUser.username,
-        updatedUser.profileImage);
+        updatedUser.profileImage,
+        await getUserRoleName(updatedUser._id));
 
     return token;
 };
@@ -128,6 +131,12 @@ exports.changePassword = async (userId, oldPassword, newPassword) => {
 
     const newPasswordHash = await generateHash(newPassword, 10);
     await User.updateOne({ _id: userId }, { password: newPasswordHash });
+};
+
+const getUserRoleName = async (userId) => {
+    const user = await User.findById(userId);
+    const role = (await UserRole.findById(user.role)).name;
+    return role;
 };
 
 const getUserRoleId = async () => (await UserRole.findOne({ name: 'user' }))._id;

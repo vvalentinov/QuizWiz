@@ -13,6 +13,7 @@ exports.authenticate = async (req, res, next) => {
 
             res.locals.user = decodedToken;
             res.locals.isAuthenticated = true;
+            res.locals.isAdmin = decodedToken.role === 'admin';
 
             next();
         } catch (error) {
