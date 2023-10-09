@@ -6,12 +6,12 @@ exports.loginRoute = '/login';
 
 exports.createQuizRoute = '/create';
 
-exports.userSettingsRoute = '/settings/:userId';
+exports.userSettingsRoute = '/:userId';
 
-exports.changeUserPictureRoute = '/settings/picture';
+exports.changeUserPictureRoute = '/picture';
 
-exports.changeUserUsernameRoute = '/settings/username';
+exports.changeUserUsernameRoute = '/username';
 
-exports.changeUserPasswordRoute = '/settings/password';
+exports.changeUserPasswordRoute = '/password';
 
 exports.logoutRoute = '/logout';
