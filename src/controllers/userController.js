@@ -6,7 +6,15 @@ const userService = require('../services/userService');
 
 const { getErrorMessage } = require('../utils/errorHelper');
 
-const { registerRoute, loginRoute } = require('../constants/routesNames');
+const {
+    registerRoute,
+    loginRoute,
+    userSettingsRoute,
+    changeUserPictureRoute,
+    changeUserUsernameRoute,
+    changeUserPasswordRoute,
+    logoutRoute,
+} = require('../constants/routesNames');
 
 const { isAuthenticated } = require('../middlewares/authMiddleware');
 
@@ -54,13 +62,13 @@ router.post(loginRoute, async (req, res) => {
     }
 });
 
-router.get('/settings/:userId', async (req, res) => {
+router.get(userSettingsRoute, async (req, res) => {
     const userId = req.params.userId;
     const user = await userService.getUserWithId(userId).populate('role').lean();
     res.render('users/settings', { user });
 });
 
-router.post('/settings/picture',
+router.post(changeUserPictureRoute,
     isAuthenticated,
     multer().single('image'),
     async (req, res) => {
@@ -76,7 +84,7 @@ router.post('/settings/picture',
         }
     });
 
-router.post('/settings/username', isAuthenticated, async (req, res) => {
+router.post(changeUserUsernameRoute, isAuthenticated, async (req, res) => {
     const { username } = req.body;
     const userId = req.user._id;
     try {
@@ -88,7 +96,7 @@ router.post('/settings/username', isAuthenticated, async (req, res) => {
     }
 });
 
-router.post('/settings/password', isAuthenticated, async (req, res) => {
+router.post(changeUserPasswordRoute, isAuthenticated, async (req, res) => {
     const { oldPassword, newPassword } = req.body;
     const userId = req.user._id;
     try {
@@ -100,7 +108,7 @@ router.post('/settings/password', isAuthenticated, async (req, res) => {
     }
 });
 
-router.get('/logout', (req, res) => {
+router.get(logoutRoute, (req, res) => {
     res.clearCookie(JWT_KEY);
     res.redirect('/');
 });
