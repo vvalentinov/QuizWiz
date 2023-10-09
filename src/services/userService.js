@@ -2,7 +2,7 @@ const User = require('../models/User');
 const UserRole = require('../models/UserRole');
 
 const { generateToken } = require('../utils/generateToken');
-const { validateUserPassword } = require('../utils/bcryptHelper');
+const { validateUserPassword, generateHash } = require('../utils/bcryptHelper');
 const { uploadImage, deleteImage } = require('../utils/cloudinaryUtil');
 
 require('dotenv').config();
@@ -111,8 +111,23 @@ exports.changeUsername = async (userId, newUsername) => {
     if (!newUsername) {
         throw new Error('Username input is empty!');
     }
+
     await User.findByIdAndUpdate(userId, { username: newUsername });
-    // const user = await User.findById(userId);
+};
+
+exports.changePassword = async (userId, oldPassword, newPassword) => {
+    if (!oldPassword || !newPassword) {
+        throw new Error('You must enter both Old Password and New Password!');
+    }
+
+    const user = await User.findById(userId);
+    const isOldPasswordValid = await validateUserPassword(oldPassword, user.password);
+    if (!isOldPasswordValid) {
+        throw new Error('Oops! The old password you entered is incorrect. Please try again.❌');
+    }
+
+    const newPasswordHash = await generateHash(newPassword, 10);
+    await User.updateOne({ _id: userId }, { password: newPasswordHash });
 };
 
 const getUserRoleId = async () => (await UserRole.findOne({ name: 'user' }))._id;

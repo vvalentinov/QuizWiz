@@ -88,6 +88,18 @@ router.post('/settings/username', isAuthenticated, async (req, res) => {
     }
 });
 
+router.post('/settings/password', isAuthenticated, async (req, res) => {
+    const { oldPassword, newPassword } = req.body;
+    const userId = req.user._id;
+    try {
+        await userService.changePassword(userId, oldPassword, newPassword);
+        res.redirect('/');
+    } catch (error) {
+        const user = await userService.getUserWithId(userId).populate('role').lean();
+        res.render('users/settings', { user, errorMessage: getErrorMessage(error) });
+    }
+});
+
 router.get('/logout', (req, res) => {
     res.clearCookie(JWT_KEY);
     res.redirect('/');

@@ -59,12 +59,53 @@
             <form action="/users/settings/username" method="POST">
                 <h3>Change Username</h3>
                 <div class="form-floating my-4">
-                    <input type="text" class="form-control border border-2" id="floatingInput" name="username"
-                        placeholder="username" value="{{user.username}}">
+                    <input type="text" class="form-control border border-2 border-dark" id="floatingInput"
+                        name="username" placeholder="username" value="{{user.username}}">
                     <label for="floatingInput">Username</label>
                 </div>
                 <button class="btn btn-danger btn-lg px-5 border border-2 border-dark" type="submit">
                     Change <i class="fa-regular fa-user"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="container border border-3 border-dark rounded-5 text-center my-4 cardColor">
+    <div class="d-flex justify-content-center align-items-stretch my-3 gap-4 px-4">
+        <div
+            class="border border-2 border-dark w-50 px-3 rounded-5 settingsContainer d-flex justify-content-center align-items-center gap-3">
+            <div class="card text-center text-white border border-3 border-dark rounded-5 w-50">
+                <div class="card-body fs-5">
+                    <p>🔐 Ready for a password remix? Your password is like the guardian of your online world, and it's
+                        time to strengthen its defenses!🔒
+                    </p>
+                </div>
+            </div>
+            <div class="card text-center text-white border border-3 border-dark rounded-5 w-50">
+                <div class="card-body fs-5">
+                    <p>What secure passphrase will you create this time? Will it be a combination of numbers, symbols,
+                        and letters that only you can decipher?💪
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div
+            class="w-50 border border-2 border-dark rounded-5 py-3 px-3 settingsContainer d-flex flex-column justify-content-center">
+            <form action="/users/settings/password" method="POST">
+                <h3>Change Password</h3>
+                <div class="form-floating my-4">
+                    <input type="password" class="form-control border border-2 border-dark" id="floatingInput"
+                        name="oldPassword" placeholder="password">
+                    <label for="floatingInput">Old Password</label>
+                </div>
+                <div class="form-floating my-4">
+                    <input type="password" class="form-control border border-2 border-dark" id="floatingInput"
+                        name="newPassword" placeholder="password">
+                    <label for="floatingInput">New Password</label>
+                </div>
+                <button class="btn btn-danger btn-lg px-5 border border-2 border-dark" type="submit">
+                    Change <i class="fa-solid fa-key"></i>
                 </button>
             </form>
         </div>
