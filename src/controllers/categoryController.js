@@ -5,12 +5,18 @@ const categoryService = require('../services/categoryService');
 const { isAuthenticated } = require('../middlewares/authMiddleware');
 const { isAdmin } = require('../middlewares/isAdminMiddleware');
 
-router.get('/create', isAuthenticated, isAdmin, (req, res) => {
-    res.render('categories/create');
-});
+const { createRoute } = require('../constants/routesNames/category');
+
+router.get(
+    createRoute,
+    isAuthenticated,
+    isAdmin,
+    (req, res) => {
+        res.render('categories/create');
+    });
 
 router.post(
-    '/create',
+    createRoute,
     isAuthenticated,
     isAdmin,
     async (req, res) => {
