@@ -9,6 +9,16 @@ const quizSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    questionsCount: {
+        type: Number,
+        required: true,
+        max: 50,
+    },
+    status: {
+        type: String,
+        required: true,
+        enum: ['Pending', 'Completed'],
+    },
     category: {
         type: mongoose.Types.ObjectId,
         ref: 'Category',
@@ -17,11 +27,6 @@ const quizSchema = new mongoose.Schema({
         type: mongoose.Types.ObjectId,
         ref: 'User',
         required: true,
-    },
-    questionsCount: {
-        type: Number,
-        required: true,
-        max: 50,
     },
     questions: [{
         type: mongoose.Types.ObjectId,
