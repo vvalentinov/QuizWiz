@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-const { createQuizRoute } = require('../constants/routesNames/quiz');
+const { createQuizRoute, userPendingQuizzesRoute } = require('../constants/routesNames/quiz');
 
 const { isAuthenticated } = require('../middlewares/authMiddleware');
 
@@ -15,11 +15,19 @@ router.get(createQuizRoute, isAuthenticated, async (req, res) => {
 router.post(createQuizRoute, isAuthenticated, async (req, res) => {
     const { title, description, category, questionsCount } = req.body;
     const categoryId = await categoryService.getCategoryId(category);
-    const creator = req.user._id;
+    const creatorId = req.user._id;
 
-    await quizService.create(title, categoryId, description, Number(questionsCount), creator);
+    await quizService.create(title, categoryId, description, Number(questionsCount), creatorId);
 
     res.redirect('/');
+});
+
+router.get(userPendingQuizzesRoute, isAuthenticated, async (req, res) => {
+    const userId = req.params.userId;
+    const quizzes = await quizService.getUserPendingQuizzes(userId).populate('category').lean();
+    const quizzesCount = quizzes.length;
+
+    res.render('quizzes/pendingQuizzes', { quizzes, quizzesCount });
 });
 
 module.exports = router;

@@ -11,4 +11,7 @@ exports.create = (
         description,
         questionsCount,
         creator,
+        status: 'Pending',
     });
+
+exports.getUserPendingQuizzes = (userId) => Quiz.find({ creator: userId, status: 'Pending' });
