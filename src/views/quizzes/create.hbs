@@ -1,1 +1,35 @@
-<h2 class="text-center mt-5">Create Quiz</h2>
+<h2 class="text-center my-5">Create Quiz</h2>
+
+<div class="container mb-5">
+    <div class="row justify-content-center">
+        <form method="post" class="col-8">
+            <div class="form-floating mb-4">
+                <input type="text" class="form-control border border-2 border-dark" id="floatingInput" name="title"
+                    placeholder="Title">
+                <label for="floatingInput">Quiz Title</label>
+            </div>
+            <div class="form-floating mb-4">
+                <select class="form-select border border-2 border-dark" id="floatingSelect"
+                    aria-label="Floating label select example" name="category">
+                    {{#each categories}}
+                    <option value={{this.name}}>{{name}}</option>
+                    {{/each}}
+                </select>
+                <label for="floatingSelect">Choose Quiz Category</label>
+            </div>
+            <div class="form-floating mb-4">
+                <textarea class="form-control border border-2 border-dark h-100" placeholder="Leave a comment here"
+                    id="floatingTextarea" rows="10" name="description"></textarea>
+                <label for="floatingTextarea">Quiz Description</label>
+            </div>
+            <div class="form-floating mb-4">
+                <input type="number" min="5" max="50" class="form-control border border-2 border-dark"
+                    id="floatingInput" name="questionsCount" placeholder="Questions Count">
+                <label for="floatingInput">Questions Count</label>
+            </div>
+            <div class="d-grid gap-2">
+                <button class="btn btn-primary" type="submit">Create Quiz</button>
+            </div>
+        </form>
+    </div>
+</div>

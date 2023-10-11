@@ -68,6 +68,10 @@ footer {
     background-color: #A565B8;
 }
 
+.carousel {
+    height: 20rem;
+}
+
 @media only screen and (max-width: 991px) {
     .navbar .collapse .navbar-nav:nth-child(2) {
         display: block !important;

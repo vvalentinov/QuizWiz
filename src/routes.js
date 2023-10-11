@@ -12,7 +12,7 @@ router.use('/quiz', quizController);
 router.use('/category', categoryController);
 router.use(homeController);
 router.use('*', (req, res) => {
-    res.status(404).render('404');
+    res.status(404).render('statusCodePages/404');
 });
 
 module.exports = router;
