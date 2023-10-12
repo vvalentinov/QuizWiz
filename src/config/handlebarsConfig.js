@@ -12,7 +12,7 @@ exports.handlebarsConfig = (app) => {
             get404PageUrl() { return process.env.CLOUDINARY_404_URL },
             repeat: function (n, block) {
                 let accum = '';
-                for (let i = 0; i < n - 1; i++) {
+                for (let i = 0; i < n; i++) {
                     accum += block.fn(i + 1);
                 }
                 return accum;

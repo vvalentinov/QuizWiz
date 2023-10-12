@@ -1,0 +1,68 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Create Question Number: {{questionNumber}}
+</button>
+
+<!-- Modal -->
+<div class="modal fade modal-lg " id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel">Template For Question {{questionNumber}}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form method="post" action="/quiz/addQuestion/{{quiz._id}}">
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control border border-2" id="questionInput" name="question"
+                            placeholder="question">
+                        <label for="questionInput">Question</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control border border-2" id="firstAnswer" name="answers"
+                            placeholder="A">
+                        <label for="firstAnswer">Answer A</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control border border-2" id="secondAnswer" name="answers"
+                            placeholder="B">
+                        <label for="secondAnswer">Answer B</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control border border-2" id="thirdAnswer" name="answers"
+                            placeholder="C">
+                        <label for="thirdAnswer">Answer C</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control border border-2" id="fourthAnswer" name="answers"
+                            placeholder="D">
+                        <label for="fourthAnswer">Answer D</label>
+                    </div>
+                    <div class="mb-3 text-center">
+                        <h4>Choose Correct Answer</h4>
+                        <input type="radio" class="btn-check" name="correctAnswer" value='0' id="option1"
+                            autocomplete="off">
+                        <label class="btn btn-secondary" for="option1">Answer A</label>
+
+                        <input type="radio" class="btn-check" name="correctAnswer" value='1' id="option2"
+                            autocomplete="off">
+                        <label class="btn btn-secondary" for="option2">Answer B</label>
+
+                        <input type="radio" class="btn-check" name="correctAnswer" value='2' id="option3"
+                            autocomplete="off">
+                        <label class="btn btn-secondary" for="option3">Answer C</label>
+
+                        <input type="radio" class="btn-check" name="correctAnswer" value='3' id="option4"
+                            autocomplete="off">
+                        <label class="btn btn-secondary" for="option4">Answer D</label>
+                    </div>
+
+                    <div class="d-grid gap-2">
+                        <button class="btn btn-primary" type="submit">Add Question</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

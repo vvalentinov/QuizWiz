@@ -15,3 +15,5 @@ exports.create = (
     });
 
 exports.getUserPendingQuizzes = (userId) => Quiz.find({ creator: userId, status: 'Pending' });
+
+exports.getQuizById = (quizId) => Quiz.findById(quizId);
