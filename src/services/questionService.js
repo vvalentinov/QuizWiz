@@ -15,9 +15,9 @@ exports.addQuestionToQuiz = async (questionData, quizId) => {
     let answers = [];
     inputAnswers.forEach((answer, index) => answers.push({ answer, isCorrect: index === Number(correctAnswer) }));
 
-    const question = await Question.create({ question: questionInput, answers });
-
     const quiz = await Quiz.findById(quizId);
+    const question = await Question.create({ question: questionInput, answers, questionNumber: quiz.questions.length + 1 });
+
     quiz.questions.push(question);
     await quiz.save();
 };

@@ -17,6 +17,20 @@ exports.handlebarsConfig = (app) => {
                 }
                 return accum;
             },
+            iterate: function (collection, options) {
+                let result = '';
+                for (let i = 0; i < collection.length; i++) {
+                    result += options.fn(collection[i]);
+                }
+                return result;
+            },
+            iterateByTwo: function (collection, options) {
+                let result = '';
+                for (let i = 0; i < collection.length; i += 2) {
+                    result += options.fn(collection.slice(i, i + 2));
+                }
+                return result;
+            },
         },
         extname: 'hbs',
     });

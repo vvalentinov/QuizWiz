@@ -39,18 +39,17 @@ router.get(userPendingQuizzesRoute, isAuthenticated, async (req, res) => {
 });
 
 router.get(completeQuizRoute, isAuthenticated, async (req, res) => {
-    const quiz = await quizService.getQuizById(req.params.quizId).populate('category').lean();
-
+    const quiz = await quizService.getQuizById(req.params.quizId).populate('category').populate('questions').lean();
     res.render('quizzes/completeQuiz', { quiz, questionNumber: quiz.questions.length + 1 });
 });
 
 router.post(addQuestionRoute, isAuthenticated, async (req, res) => {
-    const questionData = req.body;
+    const quizId = req.params.quizId;
+    const quiz = await quizService.getQuizById(quizId).lean();
     try {
-        await questionService.addQuestionToQuiz(questionData, req.params.quizId);
-        res.redirect('/');
+        await questionService.addQuestionToQuiz(req.body, quizId);
+        res.redirect(`/quiz/complete/${quizId}`);
     } catch (error) {
-        const quiz = await quizService.getQuizById(req.params.quizId).lean();
         res.render('quizzes/completeQuiz', { quiz, errorMessage: getErrorMessage(error) });
     }
 });

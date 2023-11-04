@@ -1,3 +1,10 @@
+<h2>To complete your quiz you must add all of the remaining questions!</h2>
+<h2>Quiz Title: {{quiz.title}}</h2>
+<h2>Quiz Description: {{quiz.description}}</h2>
+<h2>Quiz Category: {{quiz.category.name}}</h2>
+<h2></h2>
+
+
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
     Create Question Number: {{questionNumber}}
@@ -66,3 +73,22 @@
         </div>
     </div>
 </div>
+
+{{#iterate quiz.questions}}
+<div class="d-flex align-items-center justify-content-evenly gap-5 my-3">
+    <div class="card w-50 border-2 border-dark">
+        <div class="card-header">
+            {{this.questionNumber}}. {{this.question}}
+        </div>
+        <ul class="list-group list-group-flush">
+            {{#each this.answers}}
+            {{#if this.isCorrect}}
+            <li class="list-group-item bg-light fw-bold">{{this.answer}}</li>
+            {{else}}
+            <li class="list-group-item">{{this.answer}}</li>
+            {{/if}}
+            {{/each}}
+        </ul>
+    </div>
+</div>
+{{/iterate}}
